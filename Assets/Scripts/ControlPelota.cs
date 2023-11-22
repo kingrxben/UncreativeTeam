@@ -42,6 +42,8 @@ public class ControlPelota : MonoBehaviour
     //Si ya se inició el tiro.
     private bool tiroIniciado = false;
 
+    public ControladorPartidaScript controladorPartidaScript;
+
     //El objeto AR Cámara (este objeto se busca en ejecución).
 
     [SerializeField]
@@ -50,8 +52,10 @@ public class ControlPelota : MonoBehaviour
     //Componente XROrigin (se busca en ejecución).
 
     [SerializeField]
-    
     XROrigin xrOrigin;
+
+    [SerializeField]
+    GameObject controladorPartida;
 
     //El Rigidbody de la pelota.
     Rigidbody rigidbody;
@@ -72,6 +76,9 @@ public class ControlPelota : MonoBehaviour
 
         //El padre del transform, es el transform del ARCamera.
         transform.parent = AR_Camera.transform;
+
+        controladorPartida = GameObject.FindGameObjectWithTag("ControladorPartida");
+        controladorPartidaScript = controladorPartida.GetComponent<ControladorPartidaScript>();
 
         //Se reinicia la posición de la pelota.
         ReiniciarPelota();
@@ -138,4 +145,16 @@ public class ControlPelota : MonoBehaviour
         Vector3 posicionPelota = AR_Camera.transform.position + AR_Camera.transform.forward * offsetPelotaCamara.z + AR_Camera.transform.up * offsetPelotaCamara.y;
         transform.position = posicionPelota;
     }
+
+    private void OnTriggerEnter(Collider other) {
+        if(other.gameObject.CompareTag("Puntaje")){
+            controladorPartidaScript.sumarPuntaje(1);
+            ReiniciarPelota();
+            Debug.Log("Anoté.");
+        }
+    }
+
+
+
+
 }
