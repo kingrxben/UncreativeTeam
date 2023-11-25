@@ -150,7 +150,6 @@ public class ControlPelota : MonoBehaviour
         if(other.gameObject.CompareTag("Puntaje")){
             controladorPartidaScript.sumarPuntaje(1);
             ReiniciarPelota();
-            Debug.Log("Anoté.");
         }
     }
 

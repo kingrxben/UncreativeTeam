@@ -93,6 +93,7 @@ public class PosicionarCesta : MonoBehaviour
 
                     ControladorPartidaScript controladorPartidaScript = GameObject.FindGameObjectWithTag("ControladorPartida").GetComponent<ControladorPartidaScript>();
                     controladorPartidaScript.aparecerPuntaje();
+                    controladorPartidaScript.aparecerTiempo();
 
                     //Se instancia la cesta, en la posición del golpe, y se rota a 180 con respecto a Vector3.up
                     cestaGenerada = Instantiate(cestaPrefab, hitPose.position, Quaternion.AngleAxis(180,Vector3.up));
