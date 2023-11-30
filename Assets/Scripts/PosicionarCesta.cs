@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.ARFoundation;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(ARRaycastManager))]
 public class PosicionarCesta : MonoBehaviour
@@ -66,6 +67,14 @@ public class PosicionarCesta : MonoBehaviour
         m_RaycastManager = GetComponent<ARRaycastManager>();
     }
 
+    private void Start() {
+        Debug.Log("Cantidad de jugadores: " + PlayerPrefs.GetInt("CantidadJugadores"));
+        Debug.Log("Modo de juego:" + PlayerPrefs.GetInt("ModoDeJuego"));
+        Debug.Log("Jugador actual: " + PlayerPrefs.GetInt("JugadorActual"));
+    }
+
+
+
     void Update()
     {
         //Si la cesta ya está posicionada, se retorna.
@@ -93,7 +102,14 @@ public class PosicionarCesta : MonoBehaviour
 
                     ControladorPartidaScript controladorPartidaScript = GameObject.FindGameObjectWithTag("ControladorPartida").GetComponent<ControladorPartidaScript>();
                     controladorPartidaScript.aparecerPuntaje();
-                    controladorPartidaScript.aparecerTiempo();
+
+                    int ModoDeJuego = PlayerPrefs.GetInt("ModoDeJuego",0);
+
+                    if(ModoDeJuego == 0){
+                        controladorPartidaScript.aparecerTiempo();
+                    }else if(ModoDeJuego == 1){
+                        controladorPartidaScript.aparecerVidas();
+                    }
 
                     //Se instancia la cesta, en la posición del golpe, y se rota a 180 con respecto a Vector3.up
                     cestaGenerada = Instantiate(cestaPrefab, hitPose.position, Quaternion.AngleAxis(180,Vector3.up));

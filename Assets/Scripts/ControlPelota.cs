@@ -44,6 +44,14 @@ public class ControlPelota : MonoBehaviour
 
     public ControladorPartidaScript controladorPartidaScript;
 
+    //Agregar script de música y sonidos.
+
+    private bool SeAnoto = true;
+    
+    int modoDeJuego;
+
+    public AudioPartidaScript audioPartidaScript;
+
     //El objeto AR Cámara (este objeto se busca en ejecución).
 
     [SerializeField]
@@ -61,6 +69,8 @@ public class ControlPelota : MonoBehaviour
     Rigidbody rigidbody;
 
     public void Start(){
+
+        modoDeJuego = PlayerPrefs.GetInt("ModoDeJuego",0);
 
         //Se obtiene el componente Rigidbody.
         rigidbody = gameObject.GetComponent<Rigidbody>();
@@ -80,6 +90,7 @@ public class ControlPelota : MonoBehaviour
         controladorPartida = GameObject.FindGameObjectWithTag("ControladorPartida");
         controladorPartidaScript = controladorPartida.GetComponent<ControladorPartidaScript>();
 
+        audioPartidaScript = GameObject.Find("ControladorMusicaYSonido").GetComponent<AudioPartidaScript>();
         //Se reinicia la posición de la pelota.
         ReiniciarPelota();
     }
@@ -100,6 +111,8 @@ public class ControlPelota : MonoBehaviour
             duracion = tiempoTermino - tiempoInicio;
             direccion = Input.mousePosition - posicionInicial;
             direccionElegida = true;
+            audioPartidaScript.reproducirLanzamiento();
+            SeAnoto = false;
         }
 
         //Cuando ya se eligió la dirección, la pelota tiene masa y usa gravedad.
@@ -128,6 +141,9 @@ public class ControlPelota : MonoBehaviour
 
         //Si ya pasaron entre 3 y 4 segundos desde que se terminó de lanzar, se reinicia la pelota.
         if(Time.time - tiempoTermino >= 3 && Time.time - tiempoTermino <= 4){
+            if(modoDeJuego == 1 && !SeAnoto){
+                controladorPartidaScript.restarVidas(1);
+            }
             ReiniciarPelota();
         }
     }
@@ -144,15 +160,21 @@ public class ControlPelota : MonoBehaviour
         //La posición de la pelota, pasa a ser con respecto a la cámara, pero con su offset incluido.
         Vector3 posicionPelota = AR_Camera.transform.position + AR_Camera.transform.forward * offsetPelotaCamara.z + AR_Camera.transform.up * offsetPelotaCamara.y;
         transform.position = posicionPelota;
+        SeAnoto = true;
     }
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.CompareTag("Puntaje")){
+            audioPartidaScript.reproducirPunto();
+            SeAnoto = true;
             controladorPartidaScript.sumarPuntaje(1);
             ReiniciarPelota();
         }
     }
 
+    private void OnCollisionEnter(Collision other) {
+        audioPartidaScript.reproducirColision();
+    }
 
 
 
