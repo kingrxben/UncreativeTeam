@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EscenaAR.unity
     guid: 3da74f0cf33eac3429988d64f6ebc35b
+  - enabled: 1
+    path: Assets/Scenes/EscenaDeTransicion.unity
+    guid: 35a0e58e7a48bc24487b79548a46c767
+  - enabled: 1
+    path: Assets/Scenes/EscenaResultados.unity
+    guid: c3bc3ad79c0dbee48a146cd76407e04c
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 363b9e025e4cf6748b50c6fadcecca00, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 3b1b0d141700a5e43a8a55c6438d2f1e, type: 2}

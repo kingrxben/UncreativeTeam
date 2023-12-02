@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.3, y: 4.333, z: -0.42}
-  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -105,7 +105,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.44
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7614046658809101113
 Rigidbody:
@@ -146,9 +146,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb141021e7f3ff4e8bf1738c35a4d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuerza_tiro: 100
+  fuerza_tiro: 90
   direccion_tiro_X: 0.17
   direccion_tiro_Y: 0.67
   offsetPelotaCamara: {x: 0, y: -0.4, z: 1}
+  controladorPartidaScript: {fileID: 0}
+  audioPartidaScript: {fileID: 0}
   AR_Camera: {fileID: 0}
   xrOrigin: {fileID: 0}
+  controladorPartida: {fileID: 0}

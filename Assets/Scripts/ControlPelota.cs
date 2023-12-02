@@ -10,7 +10,7 @@ public class ControlPelota : MonoBehaviour
 {
 
     //La fuerza del tiro.
-    public float fuerza_tiro = 100f;
+    public float fuerza_tiro = 90f;
 
     //La dirección del tiro en X.
     public float direccion_tiro_X = 0.17f;
@@ -142,6 +142,7 @@ public class ControlPelota : MonoBehaviour
         //Si ya pasaron entre 3 y 4 segundos desde que se terminó de lanzar, se reinicia la pelota.
         if(Time.time - tiempoTermino >= 3 && Time.time - tiempoTermino <= 4){
             if(modoDeJuego == 1 && !SeAnoto){
+                audioPartidaScript.reproducirPerderVida();
                 controladorPartidaScript.restarVidas(1);
             }
             ReiniciarPelota();
@@ -175,7 +176,5 @@ public class ControlPelota : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
         audioPartidaScript.reproducirColision();
     }
-
-
 
 }

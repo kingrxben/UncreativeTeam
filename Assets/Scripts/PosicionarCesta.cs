@@ -103,6 +103,9 @@ public class PosicionarCesta : MonoBehaviour
                     ControladorPartidaScript controladorPartidaScript = GameObject.FindGameObjectWithTag("ControladorPartida").GetComponent<ControladorPartidaScript>();
                     controladorPartidaScript.aparecerPuntaje();
 
+                    AudioPartidaScript audioPartidaScript = GameObject.FindGameObjectWithTag("ControladorMusicaYSonido").GetComponent<AudioPartidaScript>();
+                    audioPartidaScript.reproducirMusica();
+
                     int ModoDeJuego = PlayerPrefs.GetInt("ModoDeJuego",0);
 
                     if(ModoDeJuego == 0){
@@ -111,8 +114,19 @@ public class PosicionarCesta : MonoBehaviour
                         controladorPartidaScript.aparecerVidas();
                     }
 
-                    //Se instancia la cesta, en la posición del golpe, y se rota a 180 con respecto a Vector3.up
-                    cestaGenerada = Instantiate(cestaPrefab, hitPose.position, Quaternion.AngleAxis(180,Vector3.up));
+                    //Se instancia la cesta, en la posición del golpe, y se rota a 0 con respecto a Vector3.up
+                    cestaGenerada = Instantiate(cestaPrefab, hitPose.position, Quaternion.AngleAxis(0,Vector3.up));
+
+                    Vector3 posicion = cestaGenerada.transform.position;
+                    Vector3 camara = Camera.main.transform.position;
+                    Vector3 direccion = camara - posicion;
+                    
+                    Vector3 rotacionObjetivoEuler = Quaternion.LookRotation(direccion).eulerAngles;
+                    Vector3 eulerEscalado = Vector3.Scale(rotacionObjetivoEuler,cestaGenerada.transform.up.normalized);
+                    
+                    Quaternion rotacionObjetivo = Quaternion.Euler(eulerEscalado);
+                    cestaGenerada.transform.rotation = cestaGenerada.transform.rotation * rotacionObjetivo;
+                    cestaGenerada.transform.parent = transform.parent;
                     
                     //El padre del transform de la cesta, es el padre del transform del XR Session.
                     cestaGenerada.transform.parent = transform.parent;

@@ -711,7 +711,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2097,7 +2097,7 @@ GameObject:
   - component: {fileID: 2086545954}
   m_Layer: 0
   m_Name: ControladorMusicaYSonido
-  m_TagString: Untagged
+  m_TagString: ControladorMusicaYSonido
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2119,7 +2119,15 @@ MonoBehaviour:
   lanzamientoPelota: {fileID: 8300000, guid: 66d8515202d8f2145b7f540b957c2690, type: 3}
   colisionPelota: {fileID: 8300000, guid: 48f668d8bef824d47a337de8595c83f3, type: 3}
   encestarPelota: {fileID: 8300000, guid: da143b54fc8e8094ea10c996815ceae7, type: 3}
-  arregloCanciones: []
+  fallo_perderVida: {fileID: 8300000, guid: 79178ce0d5b99c7459ddcff1cf7c7b56, type: 3}
+  arregloCanciones:
+  - {fileID: 8300000, guid: 00131fd68e7333949a34da3cca431d64, type: 3}
+  - {fileID: 8300000, guid: 5c70a35822c21014a90b6188f881353f, type: 3}
+  - {fileID: 8300000, guid: 2d71bf9e315e218479f4d013ca23f549, type: 3}
+  - {fileID: 8300000, guid: 1d16bead4364ab64d9bd01baa45568a2, type: 3}
+  - {fileID: 8300000, guid: e0ac49fbc6ed88141967fe805083ab9f, type: 3}
+  - {fileID: 8300000, guid: 53e08d34a661c8e4e924c9740c74b6b8, type: 3}
+  - {fileID: 8300000, guid: 6764fd799e0f0ff4a905e0905a044b18, type: 3}
 --- !u!4 &2086545955
 Transform:
   m_ObjectHideFlags: 0

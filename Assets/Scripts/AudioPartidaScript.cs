@@ -14,6 +14,7 @@ public class AudioPartidaScript : MonoBehaviour
     [SerializeField] AudioClip lanzamientoPelota;
     [SerializeField] AudioClip colisionPelota;
     [SerializeField] AudioClip encestarPelota;
+    [SerializeField] AudioClip fallo_perderVida;
 
     [Header ("------------Arreglo de canciones-----------")]
     [SerializeField]AudioClip[] arregloCanciones;
@@ -23,9 +24,8 @@ public class AudioPartidaScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //cancionDelArreglo = Random.Range(0,arregloCanciones.Length);
-        //musicaSource.clip = arregloCanciones[cancionDelArreglo];
-        
+        cancionDelArreglo = Random.Range(0,arregloCanciones.Length);
+        musicaSource.clip = arregloCanciones[cancionDelArreglo];
     }
 
     // Update is called once per frame
@@ -45,4 +45,14 @@ public class AudioPartidaScript : MonoBehaviour
     public void reproducirPunto(){
         SFXSource.PlayOneShot(encestarPelota);
     }
+
+    public void reproducirMusica(){
+        musicaSource.Play();
+    }
+
+    public void reproducirPerderVida(){
+        SFXSource.PlayOneShot(fallo_perderVida);
+    }
+
+
 }
