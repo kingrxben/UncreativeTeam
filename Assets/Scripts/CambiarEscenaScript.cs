@@ -12,12 +12,16 @@ public class CambiarEscena : MonoBehaviour
     //0: modo de juego por tiempo. 1: modo de juego por vidas.
     int modoDeJuego;
 
+    int material;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         cantidadJugadores = 1;
         modoDeJuego = 0;
+        material = PlayerPrefs.GetInt("MaterialSkin",0);
     }
 
     // Update is called once per frame
@@ -27,6 +31,7 @@ public class CambiarEscena : MonoBehaviour
     }
 
     public void changeScene(){
+        PlayerPrefs.SetInt("MaterialSkin",material);
         PlayerPrefs.SetInt("CantidadJugadores",cantidadJugadores);
         PlayerPrefs.SetInt("ModoDeJuego",modoDeJuego);
         PlayerPrefs.SetInt("JugadorActual",1);
@@ -39,5 +44,9 @@ public class CambiarEscena : MonoBehaviour
 
     public void definirModo(int modo){
         modoDeJuego = modo;
+    }
+
+    public void definirMaterial(int skin){
+        material = skin;
     }
 }

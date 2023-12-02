@@ -16,7 +16,7 @@ public class ControlPelota : MonoBehaviour
     public float direccion_tiro_X = 0.17f;
 
     //La dirección del tiro en Y.
-    public float direccion_tiro_Y = 0.60f;
+    public float direccion_tiro_Y = 0.7f;
 
     //El offset respecto a la cámara.
     public Vector3 offsetPelotaCamara = new Vector3 (0f, -1.4f, 3f);
@@ -68,6 +68,12 @@ public class ControlPelota : MonoBehaviour
     //El Rigidbody de la pelota.
     Rigidbody rigidbody;
 
+    [SerializeField]
+    Material[] materiales;
+
+    private bool dispararInicio = false;
+    private float contadorInicialDisparar = 1.0f;
+
     public void Start(){
 
         modoDeJuego = PlayerPrefs.GetInt("ModoDeJuego",0);
@@ -90,62 +96,73 @@ public class ControlPelota : MonoBehaviour
         controladorPartida = GameObject.FindGameObjectWithTag("ControladorPartida");
         controladorPartidaScript = controladorPartida.GetComponent<ControladorPartidaScript>();
 
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.material = materiales[PlayerPrefs.GetInt("MaterialSkin",0)];
+
         audioPartidaScript = GameObject.Find("ControladorMusicaYSonido").GetComponent<AudioPartidaScript>();
         //Se reinicia la posición de la pelota.
         ReiniciarPelota();
     }
 
     public void Update(){
-        
-        //Al presionar, se obtiene la posición inicial y el tiempo de inicio.
-        if(Input.GetMouseButtonDown(0)){
-            posicionInicial = Input.mousePosition;
-            tiempoInicio = Time.time;
-            tiroIniciado = true;
-            direccionElegida = false;
-        }
 
-        //Al soltar, se obtiene el tiempo de término, la duración y dirección del lanzamiento.
-        else if(Input.GetMouseButtonUp(0)){
-            tiempoTermino = Time.time;
-            duracion = tiempoTermino - tiempoInicio;
-            direccion = Input.mousePosition - posicionInicial;
-            direccionElegida = true;
-            audioPartidaScript.reproducirLanzamiento();
-            SeAnoto = false;
-        }
-
-        //Cuando ya se eligió la dirección, la pelota tiene masa y usa gravedad.
-        //Se añade una fuerza, con respecto a la posición de la cámara, la fuerza de tiro, la duración,
-        //la dirección de disparo, y la fuerza de disparo en X e Y.
-
-        if(direccionElegida){
-            rigidbody.mass = 1;
-            rigidbody.useGravity = true;
-
-            rigidbody.AddForce(AR_Camera.transform.forward * fuerza_tiro / duracion +
-            AR_Camera.transform.up * direccion.y * direccion_tiro_Y + 
-            AR_Camera.transform.right * direccion.x * direccion_tiro_X);
-
-            //El tiempo de inicio y la dirección se reinician a 0, se reinicia la posición y dirección a un vector3 0,
-            //y no se puede volver a lanzar hasta que se reinicie el contador de más abajo.
-            tiempoInicio = 0.0f;
-            duracion = 0.0f;
-
-            posicionInicial = new Vector3(0,0,0);
-            direccion = new Vector3(0,0,0);
-
-            tiroIniciado = false;
-            direccionElegida = false;
-        }
-
-        //Si ya pasaron entre 3 y 4 segundos desde que se terminó de lanzar, se reinicia la pelota.
-        if(Time.time - tiempoTermino >= 3 && Time.time - tiempoTermino <= 4){
-            if(modoDeJuego == 1 && !SeAnoto){
-                audioPartidaScript.reproducirPerderVida();
-                controladorPartidaScript.restarVidas(1);
+        if(dispararInicio){
+            //Al presionar, se obtiene la posición inicial y el tiempo de inicio.
+            if(Input.GetMouseButtonDown(0)){
+                posicionInicial = Input.mousePosition;
+                tiempoInicio = Time.time;
+                tiroIniciado = true;
+                direccionElegida = false;
             }
-            ReiniciarPelota();
+
+            //Al soltar, se obtiene el tiempo de término, la duración y dirección del lanzamiento.
+            else if(Input.GetMouseButtonUp(0)){
+                tiempoTermino = Time.time;
+                duracion = tiempoTermino - tiempoInicio;
+                direccion = Input.mousePosition - posicionInicial;
+                direccionElegida = true;
+                audioPartidaScript.reproducirLanzamiento();
+                SeAnoto = false;
+            }
+
+            //Cuando ya se eligió la dirección, la pelota tiene masa y usa gravedad.
+            //Se añade una fuerza, con respecto a la posición de la cámara, la fuerza de tiro, la duración,
+            //la dirección de disparo, y la fuerza de disparo en X e Y.
+
+            if(direccionElegida){
+                rigidbody.mass = 1;
+                rigidbody.useGravity = true;
+
+                rigidbody.AddForce(AR_Camera.transform.forward * fuerza_tiro / duracion +
+                AR_Camera.transform.up * direccion.y * direccion_tiro_Y + 
+                AR_Camera.transform.right * direccion.x * direccion_tiro_X);
+
+                //El tiempo de inicio y la dirección se reinician a 0, se reinicia la posición y dirección a un vector3 0,
+                //y no se puede volver a lanzar hasta que se reinicie el contador de más abajo.
+                tiempoInicio = 0.0f;
+                duracion = 0.0f;
+
+                posicionInicial = new Vector3(0,0,0);
+                direccion = new Vector3(0,0,0);
+
+                tiroIniciado = false;
+                direccionElegida = false;
+            }
+
+            //Si ya pasaron entre 3 y 4 segundos desde que se terminó de lanzar, se reinicia la pelota.
+            if(Time.time - tiempoTermino >= 3 && Time.time - tiempoTermino <= 4){
+                if(modoDeJuego == 1 && !SeAnoto){
+                    audioPartidaScript.reproducirPerderVida();
+                    controladorPartidaScript.restarVidas(1);
+                }
+                ReiniciarPelota();
+            }
+        }else{
+            if(contadorInicialDisparar >= 0){
+                contadorInicialDisparar -= Time.deltaTime;
+            }else{
+                dispararInicio = true;
+            }
         }
     }
 

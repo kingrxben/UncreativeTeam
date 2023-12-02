@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.ARFoundation;
 using Unity.VisualScripting;
+using TMPro;
 
 [RequireComponent(typeof(ARRaycastManager))]
 public class PosicionarCesta : MonoBehaviour
@@ -60,6 +61,9 @@ public class PosicionarCesta : MonoBehaviour
     //Lista estática de golpes del Raycast.
 
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
+
+    [SerializeField] TextMeshProUGUI textoDeInicio;
+    [SerializeField] TextMeshProUGUI textoRecomendacion;
 
     //Método Awake, al despertar. Se obtiene el componente ARRaycastManager.
     void Awake()
@@ -132,6 +136,8 @@ public class PosicionarCesta : MonoBehaviour
                     cestaGenerada.transform.parent = transform.parent;
                     
                     laCestaEstaPuesta = true;
+                    textoDeInicio.text = "";
+                    textoRecomendacion.text = "";
                     
                     //Se instancia la pelota.
                     pelotaGenerada = Instantiate(pelotaPrefab);
