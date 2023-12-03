@@ -16,7 +16,7 @@ public class ControlPelota : MonoBehaviour
     public float direccion_tiro_X = 0.17f;
 
     //La dirección del tiro en Y.
-    public float direccion_tiro_Y = 0.7f;
+    public float direccion_tiro_Y = 0.68f;
 
     //El offset respecto a la cámara.
     public Vector3 offsetPelotaCamara = new Vector3 (0f, -1.4f, 3f);
@@ -74,6 +74,8 @@ public class ControlPelota : MonoBehaviour
     private bool dispararInicio = false;
     private float contadorInicialDisparar = 1.0f;
 
+    private bool puedeDisparar = true;
+
     public void Start(){
 
         modoDeJuego = PlayerPrefs.GetInt("ModoDeJuego",0);
@@ -97,8 +99,13 @@ public class ControlPelota : MonoBehaviour
         controladorPartidaScript = controladorPartida.GetComponent<ControladorPartidaScript>();
 
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-        meshRenderer.material = materiales[PlayerPrefs.GetInt("MaterialSkin",0)];
 
+        if(PlayerPrefs.GetInt("JugadorActual") == 1){
+            meshRenderer.material = materiales[PlayerPrefs.GetInt("MaterialSkin1",0)];
+        }else if(PlayerPrefs.GetInt("JugadorActual") == 2){
+            meshRenderer.material = materiales[PlayerPrefs.GetInt("MaterialSkin2",0)];
+        }
+        
         audioPartidaScript = GameObject.Find("ControladorMusicaYSonido").GetComponent<AudioPartidaScript>();
         //Se reinicia la posición de la pelota.
         ReiniciarPelota();
@@ -108,7 +115,7 @@ public class ControlPelota : MonoBehaviour
 
         if(dispararInicio){
             //Al presionar, se obtiene la posición inicial y el tiempo de inicio.
-            if(Input.GetMouseButtonDown(0)){
+            if(Input.GetMouseButtonDown(0) && puedeDisparar){
                 posicionInicial = Input.mousePosition;
                 tiempoInicio = Time.time;
                 tiroIniciado = true;
@@ -116,13 +123,14 @@ public class ControlPelota : MonoBehaviour
             }
 
             //Al soltar, se obtiene el tiempo de término, la duración y dirección del lanzamiento.
-            else if(Input.GetMouseButtonUp(0)){
+            else if(Input.GetMouseButtonUp(0) && puedeDisparar){
                 tiempoTermino = Time.time;
                 duracion = tiempoTermino - tiempoInicio;
                 direccion = Input.mousePosition - posicionInicial;
                 direccionElegida = true;
                 audioPartidaScript.reproducirLanzamiento();
                 SeAnoto = false;
+                puedeDisparar = false;
             }
 
             //Cuando ya se eligió la dirección, la pelota tiene masa y usa gravedad.
@@ -179,6 +187,7 @@ public class ControlPelota : MonoBehaviour
         Vector3 posicionPelota = AR_Camera.transform.position + AR_Camera.transform.forward * offsetPelotaCamara.z + AR_Camera.transform.up * offsetPelotaCamara.y;
         transform.position = posicionPelota;
         SeAnoto = true;
+        puedeDisparar = true;
     }
 
     private void OnTriggerEnter(Collider other) {

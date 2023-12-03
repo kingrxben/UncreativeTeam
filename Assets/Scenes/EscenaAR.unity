@@ -2392,7 +2392,7 @@ MonoBehaviour:
   lanzamientoPelota: {fileID: 8300000, guid: 66d8515202d8f2145b7f540b957c2690, type: 3}
   colisionPelota: {fileID: 8300000, guid: 48f668d8bef824d47a337de8595c83f3, type: 3}
   encestarPelota: {fileID: 8300000, guid: da143b54fc8e8094ea10c996815ceae7, type: 3}
-  fallo_perderVida: {fileID: 8300000, guid: 79178ce0d5b99c7459ddcff1cf7c7b56, type: 3}
+  fallo_perderVida: {fileID: 8300000, guid: 3645ea8b38f59fe49a2e0c8cb6afd3bb, type: 3}
   arregloCanciones:
   - {fileID: 8300000, guid: 18c1048c0ac4533439f9c94a91922e4c, type: 3}
   - {fileID: 8300000, guid: 08b8b54143896d148ae5b6cfdbe13f86, type: 3}

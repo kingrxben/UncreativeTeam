@@ -12,8 +12,8 @@ public class CambiarEscena : MonoBehaviour
     //0: modo de juego por tiempo. 1: modo de juego por vidas.
     int modoDeJuego;
 
-    int material;
-
+    int material_jugador1;
+    int material_jugador2;
 
 
     // Start is called before the first frame update
@@ -21,7 +21,8 @@ public class CambiarEscena : MonoBehaviour
     {
         cantidadJugadores = 1;
         modoDeJuego = 0;
-        material = PlayerPrefs.GetInt("MaterialSkin",0);
+        material_jugador1 = PlayerPrefs.GetInt("MaterialSkin1",0);
+        material_jugador2 = PlayerPrefs.GetInt("MaterialSkin2",0);
     }
 
     // Update is called once per frame
@@ -31,7 +32,8 @@ public class CambiarEscena : MonoBehaviour
     }
 
     public void changeScene(){
-        PlayerPrefs.SetInt("MaterialSkin",material);
+        PlayerPrefs.SetInt("MaterialSkin1",material_jugador1);
+        PlayerPrefs.SetInt("MaterialSkin2",material_jugador2);
         PlayerPrefs.SetInt("CantidadJugadores",cantidadJugadores);
         PlayerPrefs.SetInt("ModoDeJuego",modoDeJuego);
         PlayerPrefs.SetInt("JugadorActual",1);
@@ -47,6 +49,11 @@ public class CambiarEscena : MonoBehaviour
     }
 
     public void definirMaterial(int skin){
-        material = skin;
+        if(PlayerPrefs.GetInt("SeleccionActualSkins") != 2){
+            material_jugador1 = skin;
+        }else{
+            material_jugador2 = skin;
+        }
+        Debug.Log("Selección actual de skin: " + PlayerPrefs.GetInt("SeleccionActualSkins") + " con la skin " + skin);
     }
 }

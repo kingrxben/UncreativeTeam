@@ -12,8 +12,8 @@ public class ControladorPartidaScript : MonoBehaviour
     public TextMeshProUGUI textoTiempo;
     public TextMeshProUGUI textoVidas;
 
-    int tiempoInt = 60;
-    float tiempo_float = 60.0f;
+    int tiempoInt = 61;
+    float tiempo_float = 61.0f;
     int cantidadVidas = 5;
     int modoDeJuego = 0;
     int jugadorActual;
