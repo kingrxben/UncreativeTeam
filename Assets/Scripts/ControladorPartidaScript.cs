@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
+using Unity.VisualScripting.FullSerializer;
 
 public class ControladorPartidaScript : MonoBehaviour
 {
@@ -33,6 +34,10 @@ public class ControladorPartidaScript : MonoBehaviour
     {
         if (partida_inicio){
             if(modoDeJuego == 0){
+                if(tiempoInt <= 10){
+                    pocoTiempo();
+                }
+
                 if(tiempoInt == 0){
                     guardarDatos();
                 }
@@ -40,6 +45,10 @@ public class ControladorPartidaScript : MonoBehaviour
                 tiempoInt = Mathf.CeilToInt(tiempo_float);
                 conteoAtras();
             }else if(modoDeJuego == 1){
+                if(cantidadVidas <= 2){
+                    pocasVidas();
+                }
+
                 if(cantidadVidas == 0){
                     guardarDatos();
                 }
@@ -99,4 +108,11 @@ public class ControladorPartidaScript : MonoBehaviour
         textoVidas.text = cantidadVidas.ToString();
     }
 
+    public void pocoTiempo(){
+        textoTiempo.color = Color.red;
+    }
+
+    public void pocasVidas(){
+        textoVidas.color = Color.red;
+    }
 }

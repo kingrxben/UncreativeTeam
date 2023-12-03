@@ -2394,13 +2394,13 @@ MonoBehaviour:
   encestarPelota: {fileID: 8300000, guid: da143b54fc8e8094ea10c996815ceae7, type: 3}
   fallo_perderVida: {fileID: 8300000, guid: 79178ce0d5b99c7459ddcff1cf7c7b56, type: 3}
   arregloCanciones:
-  - {fileID: 8300000, guid: 00131fd68e7333949a34da3cca431d64, type: 3}
-  - {fileID: 8300000, guid: 5c70a35822c21014a90b6188f881353f, type: 3}
-  - {fileID: 8300000, guid: 2d71bf9e315e218479f4d013ca23f549, type: 3}
-  - {fileID: 8300000, guid: 1d16bead4364ab64d9bd01baa45568a2, type: 3}
-  - {fileID: 8300000, guid: e0ac49fbc6ed88141967fe805083ab9f, type: 3}
-  - {fileID: 8300000, guid: 53e08d34a661c8e4e924c9740c74b6b8, type: 3}
-  - {fileID: 8300000, guid: 6764fd799e0f0ff4a905e0905a044b18, type: 3}
+  - {fileID: 8300000, guid: 18c1048c0ac4533439f9c94a91922e4c, type: 3}
+  - {fileID: 8300000, guid: 08b8b54143896d148ae5b6cfdbe13f86, type: 3}
+  - {fileID: 8300000, guid: ce220ef39b739fc4ea9fe3efa5ac3f4b, type: 3}
+  - {fileID: 8300000, guid: f3ed178ead2703b408daf3028e4c9bb4, type: 3}
+  - {fileID: 8300000, guid: 935f30efd21fdb748a750ff8894033bd, type: 3}
+  - {fileID: 8300000, guid: 2cfe2cac446da7d4ebf4bc5dd793021c, type: 3}
+  - {fileID: 8300000, guid: a44f279be0b1241428ce182914279b9f, type: 3}
 --- !u!4 &2086545955
 Transform:
   m_ObjectHideFlags: 0

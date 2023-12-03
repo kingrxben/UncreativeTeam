@@ -6,6 +6,7 @@ using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.ARFoundation;
 using Unity.VisualScripting;
 using TMPro;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(ARRaycastManager))]
 public class PosicionarCesta : MonoBehaviour
@@ -76,8 +77,6 @@ public class PosicionarCesta : MonoBehaviour
         Debug.Log("Modo de juego:" + PlayerPrefs.GetInt("ModoDeJuego"));
         Debug.Log("Jugador actual: " + PlayerPrefs.GetInt("JugadorActual"));
     }
-
-
 
     void Update()
     {
