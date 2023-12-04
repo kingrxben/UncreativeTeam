@@ -16,8 +16,8 @@ public class ControladorPartidaScript : MonoBehaviour
     public GameObject imagenTiempo;
     public GameObject imagenVidas;
 
-    int tiempoInt = 61;
-    float tiempo_float = 61.0f;
+    int tiempoInt = 65;
+    float tiempo_float = 65.0f;
     int cantidadVidas = 5;
     int modoDeJuego = 0;
     int jugadorActual;
