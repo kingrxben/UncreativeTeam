@@ -12,6 +12,10 @@ public class ControladorPartidaScript : MonoBehaviour
     public TextMeshProUGUI textoTiempo;
     public TextMeshProUGUI textoVidas;
 
+    public GameObject imagenPuntaje;
+    public GameObject imagenTiempo;
+    public GameObject imagenVidas;
+
     int tiempoInt = 61;
     float tiempo_float = 61.0f;
     int cantidadVidas = 5;
@@ -75,6 +79,7 @@ public class ControladorPartidaScript : MonoBehaviour
     }
 
     public void aparecerPuntaje(){
+        imagenPuntaje.SetActive(true);
         textoPuntaje.text = "Puntaje: " + puntaje;
     }
 
@@ -85,6 +90,7 @@ public class ControladorPartidaScript : MonoBehaviour
 
     public void aparecerTiempo()
     {
+        imagenTiempo.SetActive(true);
         textoTiempo.text = tiempoInt.ToString();
         partida_inicio = true;
     }
@@ -95,6 +101,7 @@ public class ControladorPartidaScript : MonoBehaviour
     }
 
     public void aparecerVidas(){
+        imagenVidas.SetActive(true);
         textoVidas.text = cantidadVidas.ToString();
         partida_inicio = true;
     }

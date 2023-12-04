@@ -13,12 +13,18 @@ public class ScriptTransicionAJugador2 : MonoBehaviour
 
     public TextMeshProUGUI textoVidas;
     public TextMeshProUGUI textotiempo;
-
+    public GameObject imagenCorazonRoto;
+    public GameObject imagenReloj;
 
     // Start is called before the first frame update
     void Start()
     {
         modoDeJuego = PlayerPrefs.GetInt("ModoDeJuego",0);
+        if(modoDeJuego == 0){
+            imagenReloj.SetActive(true);
+        }else{
+            imagenCorazonRoto.SetActive(true);
+        }
     }
 
     // Update is called once per frame
