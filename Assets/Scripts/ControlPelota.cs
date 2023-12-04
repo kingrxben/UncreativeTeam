@@ -19,7 +19,7 @@ public class ControlPelota : MonoBehaviour
     public float direccion_tiro_Y = 0.68f;
 
     //El offset respecto a la cámara.
-    public Vector3 offsetPelotaCamara = new Vector3 (0f, -1.4f, 3f);
+    public Vector3 offsetPelotaCamara = new Vector3 (0f, -0.4f, 1f);
 
     //El vector3 de la posición inicial.
     private Vector3 posicionInicial;
