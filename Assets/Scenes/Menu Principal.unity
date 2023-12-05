@@ -315,7 +315,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Se recomienda jugar en un entorno amplio, y con buena iluminacion, para
-    un mejor rastreo de la cesta, y en caso de que este muy encima
+    un mejor rastreo de la cesta, y en caso de que este muy encima.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cb4827b4837e5804ea9e3860ed368e70, type: 2}
   m_sharedMaterial: {fileID: -6933251272619415443, guid: cb4827b4837e5804ea9e3860ed368e70, type: 2}
@@ -14673,7 +14673,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
