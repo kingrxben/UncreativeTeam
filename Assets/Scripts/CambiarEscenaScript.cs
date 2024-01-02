@@ -15,6 +15,8 @@ public class CambiarEscena : MonoBehaviour
     int material_jugador1;
     int material_jugador2;
 
+    int cantidadTotalTiempo;
+    int cantidadTotalVidas;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,8 @@ public class CambiarEscena : MonoBehaviour
         modoDeJuego = 0;
         material_jugador1 = PlayerPrefs.GetInt("MaterialSkin1",0);
         material_jugador2 = PlayerPrefs.GetInt("MaterialSkin2",0);
+        cantidadTotalTiempo = PlayerPrefs.GetInt("CantidadTotalTiempo",65);
+        cantidadTotalVidas = PlayerPrefs.GetInt("CantidadTotalVidas",5);
     }
 
     // Update is called once per frame
@@ -37,6 +41,8 @@ public class CambiarEscena : MonoBehaviour
         PlayerPrefs.SetInt("CantidadJugadores",cantidadJugadores);
         PlayerPrefs.SetInt("ModoDeJuego",modoDeJuego);
         PlayerPrefs.SetInt("JugadorActual",1);
+        PlayerPrefs.SetInt("CantidadTotalVidas",cantidadTotalVidas);
+        PlayerPrefs.SetInt("CantidadTotalTiempo",cantidadTotalTiempo);
         SceneManager.LoadScene("EscenaAR");
     }
 
@@ -56,4 +62,14 @@ public class CambiarEscena : MonoBehaviour
         }
         Debug.Log("Selección actual de skin: " + PlayerPrefs.GetInt("SeleccionActualSkins") + " con la skin " + skin);
     }
+
+    public void definirTiempo(int tiempo){
+        cantidadTotalTiempo = tiempo;
+    }
+
+    public void definirVidas(int vidas){
+        cantidadTotalVidas = vidas;
+    }
+
+
 }
