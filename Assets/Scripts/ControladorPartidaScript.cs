@@ -16,9 +16,9 @@ public class ControladorPartidaScript : MonoBehaviour
     public GameObject imagenTiempo;
     public GameObject imagenVidas;
 
-    int tiempoInt = 65;
-    float tiempo_float = 65.0f;
-    int cantidadVidas = 5;
+    int tiempoInt;
+    float tiempo_float;
+    int cantidadVidas;
     int modoDeJuego = 0;
     int jugadorActual;
     int cantidadDeJugadores;
@@ -31,6 +31,9 @@ public class ControladorPartidaScript : MonoBehaviour
         modoDeJuego = PlayerPrefs.GetInt("ModoDeJuego",0);
         jugadorActual = PlayerPrefs.GetInt("JugadorActual",1);
         cantidadDeJugadores = PlayerPrefs.GetInt("CantidadJugadores",1);
+        tiempoInt = PlayerPrefs.GetInt("CantidadTotalTiempo",65);
+        cantidadVidas = PlayerPrefs.GetInt("CantidadTotalVidas",5);
+        tiempo_float = (float) tiempoInt;
     }
 
     // Update is called once per frame
